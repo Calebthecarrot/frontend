@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8">
+<button id="b">test</button><pre id="o"></pre>
+<script>
+const o = m => document.getElementById("o").textContent += m + "\n";
+o("script ran, readyState=" + document.readyState);
+o("ethereum: " + typeof window.ethereum);
+document.getElementById("b").onclick = async () => {
+  o("clicked");
+  try { const a = await window.ethereum.request({ method: "eth_requestAccounts" }); o("accounts: " + a[0]); }
+  catch (e) { o("error: " + e.code + " " + e.message); }
+};
+</script>
